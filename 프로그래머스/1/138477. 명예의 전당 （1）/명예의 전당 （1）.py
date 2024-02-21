@@ -3,7 +3,7 @@ def solution(k, score):
     l = []
     for i in score:
         l.append(i)
-        l.sort()
+        l=sorted(l)
         if len(l) <=k:
             r=l[0]
         else:
