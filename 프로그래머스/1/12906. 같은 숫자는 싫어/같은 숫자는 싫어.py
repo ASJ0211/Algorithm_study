@@ -5,5 +5,5 @@ def solution(arr):
             pass
         else:
             r.append(i)
-    
+#ㅁㄴㅇㄹ    
     return r
