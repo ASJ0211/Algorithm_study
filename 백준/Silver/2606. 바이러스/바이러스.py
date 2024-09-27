@@ -1,34 +1,27 @@
-#https://www.acmicpc.net/problem/2606
+import sys
+sys.setrecursionlimit(10**6)
+input = sys.stdin.readline
 
-visited = set()
-graph = dict()
-a= int(input())
-num = int(input())
+n = int(input())
+pair = int(input())
+graph = [[] for _ in range(n+1)]
+visited = [False] * (n+1)
+cnt = 0
 
-def make(n):
-    for i in range(n):
-        a,b = map(int,input().split())
-        if a not in graph:
-            graph[a]= []
-        if b not in graph:
-            graph[b]= []       
-        graph[a].append(b)
-        graph[b].append(a)     
+for _ in range(pair):
+    u, v = map(int, input().split())
+    graph[u].append(v)
+    graph[v].append(u)
 
-ans =set()      
-def dfs(graph,start):
-    if start not in visited:
-        visited.add(start)
-        ans.add(start)
-        for i in graph[start]:
-            dfs(graph,i)
+def dfs(x):
+    global cnt
 
+    visited[x] = True
+    # cnt += 1
+    for i in graph[x]:
+        if not visited[i]:
+            cnt+=1
+            dfs(i)
 
-make(num)
-
-try:
-    dfs(graph,1)
-
-    print(len(ans)-1)
-except:
-    print(0)
+dfs(1)
+print(cnt)
