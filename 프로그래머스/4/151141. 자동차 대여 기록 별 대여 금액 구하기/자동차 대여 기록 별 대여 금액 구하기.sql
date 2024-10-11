@@ -1,22 +1,3 @@
-# WITH DISCOUNT AS(
-#     SELECT *,
-#         CASE WHEN DATEDIFF(END_DATE, START_DATE) + 1 >= 90 THEN 0.9
-#             WHEN DATEDIFF(END_DATE, START_DATE) + 1 >= 30 THEN 0.93
-#             WHEN DATEDIFF(END_DATE, START_DATE) + 1 >= 7 THEN 0.95
-#             ELSE 1
-#         END AS DURATION_DISCOUNT
-#     FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
-# )
-
-# SELECT HISTORY_ID,
-#     ROUND(A.DAILY_FEE * (B.DURATION_DISCOUNT) * (DATEDIFF(B.END_DATE, B.START_DATE)+1)) AS FEE
-# FROM CAR_RENTAL_COMPANY_CAR A JOIN DISCOUNT B ON A.CAR_ID = B.CAR_ID
-# WHERE A.CAR_TYPE = '트럭'
-# ORDER BY 2 DESC, 1 DESC;
-
-
-
-#내꺼
 with h1 as (
     select car.car_id,his.history_id,car.car_type,car.daily_fee,timestampdiff(day,start_date,end_date)+1 as days ,
     case 
@@ -35,7 +16,7 @@ and h1.car_type = plan.car_type
 order by 2 desc, 1 desc
 
 
-# #######정답
+# #######
 # WITH value AS (
 #     SELECT car.daily_fee, car.car_type, his.history_id,
 #            DATEDIFF(end_date, start_date) + 1 AS period,
